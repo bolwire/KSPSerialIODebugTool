@@ -474,8 +474,7 @@ namespace KSPSerialIODebugTool
 
 		private void linkLabelKSPSerialIODebugToolThread_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			//System.Diagnostics.Process.Start("url");
-			MessageBox.Show(@"Will be enabled once a thread is created.");
+			System.Diagnostics.Process.Start("http://forum.kerbalspaceprogram.com/index.php?/topic/139842-wiphardware-plugin-software-a-debugging-tool-for-kspserialio/");
 		}
 
 		private void linkLabelKSPSerialIOThread_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
