@@ -64,7 +64,9 @@ namespace KSPSerialIODebugTool
 		public float IAS;           //50  Indicated Air Speed
 		public byte CurrentStage;   //51  Current stage number
 		public byte TotalStage;     //52  TotalNumber of stages
-	}
+        public float TargetDist;    //53  Distance to targeted vessel (m)
+        public float TargetV;       //54  Target vessel relative velocity
+    }
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
 	public struct HandShakePacket
@@ -156,7 +158,7 @@ namespace KSPSerialIODebugTool
 		private SettingsNStuff SettingsNStuff;
 		private KSPSerialPort KSPSerialPort;
 
-		public double refreshrate = 1.0f;
+		public double refreshrate = 1;
 
 
 		public KSPSerialIO()
@@ -240,7 +242,8 @@ namespace KSPSerialIODebugTool
 		}
 
 		private bool _updatingControls = false;
-		private void UpdateControls()
+
+        private void UpdateControls()
 		{
 			if (KSPSerialPort.Port.IsOpen)
 			{
@@ -398,7 +401,7 @@ namespace KSPSerialIODebugTool
 				_autoUpdate = true;
 				buttonUpdate.Text = @"Stop U/D";
 
-				_udTimer = new Timer {Interval = 500};
+				_udTimer = new Timer {Interval = (int)(refreshrate * 1000)};
 				_udTimer.Tick += (s, a) =>
 				{
 					UpdateControls();
@@ -426,7 +429,7 @@ namespace KSPSerialIODebugTool
 				_autoHandshake = true;
 				buttonHandshake.Text = @"Stop H/S";
 
-				_hsTimer = new Timer {Interval = 1500};
+				_hsTimer = new Timer {Interval = SettingsNStuff.HandshakeDelay};
 				_hsTimer.Tick += (s, a) =>
 				{
 					KSPSerialPort.DoHandshake();
