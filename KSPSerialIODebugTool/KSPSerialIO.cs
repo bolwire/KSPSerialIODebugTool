@@ -64,7 +64,9 @@ namespace KSPSerialIODebugTool
 		public float IAS;           //50  Indicated Air Speed
 		public byte CurrentStage;   //51  Current stage number
 		public byte TotalStage;     //52  TotalNumber of stages
-	}
+        public float TargetDist;    //53  Distance to targeted vessel (m)
+        public float TargetV;       //54  Target vessel relative velocity
+    }
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
 	public struct HandShakePacket
